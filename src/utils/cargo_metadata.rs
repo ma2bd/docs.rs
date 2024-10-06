@@ -18,7 +18,8 @@ impl CargoMetadata {
         let res = Command::new(workspace, toolchain.cargo())
             .args(&["metadata", "--format-version", "1"])
             .cd(source_dir)
-            .log_output(false)
+            .log_output(true)
+            .log_command(true)
             .run_capture()?;
         let [metadata] = res.stdout_lines() else {
             bail!("invalid output returned by `cargo metadata`")
